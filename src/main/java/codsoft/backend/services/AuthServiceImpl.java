@@ -20,7 +20,7 @@ public class AuthServiceImpl implements AuthService {
 
 	@Override
 	public UserDTO createUser(SignupRequest signupRequest) {
-		if (userRepository.existsByEmailAndName(signupRequest.getEmail(),signupRequest.getName())) {
+		if((userRepository.existsByEmail(signupRequest.getEmail()))||(userRepository.existsByEmailAndName(signupRequest.getEmail(),signupRequest.getName()))){
 			return null;
 		}
 		else{
@@ -34,6 +34,8 @@ public class AuthServiceImpl implements AuthService {
 	        userDTO.setEmail(createdUser.getEmail());
 	        userDTO.setName(createdUser.getName());
 			userDTO.setPassword(createdUser.getPassword());
+			userDTO.setCard(createdUser.getCard());
+
 	        return userDTO;}
 	    }
 
