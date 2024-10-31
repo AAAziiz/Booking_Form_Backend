@@ -11,39 +11,37 @@ Feature: UserAccountManagement
 
   Scenario Outline: Add a new user with invalid information
     When a sign-up request is sent for a new user with username <userName>, email <userEmail>, and Password<userPassword>
-    Then the sign-up should be rejected due to the uniqueness constraint of the name, email and id combination
+    Then the sign-up should be rejected due to the uniqueness constraint of the name and email combination
     Examples:
-      | userName  | userEmail            | userPassword |
-      | Arwa      | Arwa@gmail.com       | god          |
+      | userName  | userEmail            | userPassword       |
+      | Arwa      | Arwa@gmail.com           | jdkdl          |
+      |Yasmine    | Yasmineee@yahoo.fr       | godness        |
 
   Scenario Outline: Verify the uniqueness of the email field
-    Given A user with email <email> already exists
+    Given  user with email <email> already exists
     When a new user attempts to sign up with the same email <email>
     Then the sign-up should be rejected due to the uniqueness constraint of the email attribute
     Examples:
       | email           |
       | Arwa@gmail.com  |
 
-  Scenario Outline: Verify the uniqueness of the password field
-    Given A user with password <password> already exists
-    When a new user attempts to sign up with the same password <password>
-    Then the sign-up should be rejected due to the uniqueness constraint of the password attribute
-    Examples:
-      | password |
-      | god      |
+
 
   Scenario Outline: Update a User's email
     Given A user with email <OldEmail> already exists
     When the user updates their email to a new one <NewEmail>
-    Then the update should be successfully completed
+    Then the update with the new email <NewEmail> should be successfully completed
     Examples:
       | OldEmail             | NewEmail                  |
-      | Hachem.cd@gmail.com  | Hachem.cd@enicar.ucar.tn |
+      | Hachemmmm.cd@gmail.com  | Hachem.cd@enicar.ucar.tn |
 
   Scenario Outline: Update a User's password
-    Given A user with email <Email> already exists
-    When the user updates their password to a new one <NewPassword>
-    Then the update should be successfully completed
+    Given A user with this email <Email> already exists
+    When the user with the email <Email> updates their password to a new one <NewPassword>
+    Then the update with the new password <NewPassword> should be successfully completed
     Examples:
-      | Email              | NewPassword |
-      | Yasmine@yahoo.fr   | iilmk       |
+      |   NewPassword              |  Email               |
+      |iilmk                       | Yasmineee@yahoo.fr   |
+Scenario Outline: Add a card to an existant user
+   Given  A user with this email <Email> already exists
+   When

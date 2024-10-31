@@ -10,6 +10,7 @@ import codsoft.backend.models.User;
 public interface UserRepository extends JpaRepository<User, Long> {
 
 	User findByEmail(String email);
-	User findByEmailAndName(String email,String name);
-    Boolean existsByEmailAndName(String email,String name);
+    Boolean existsByEmail(String email);
+
+	boolean existsByEmailAndName(String EMAIL,String Name);
 }

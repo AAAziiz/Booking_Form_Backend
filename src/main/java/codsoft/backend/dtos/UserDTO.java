@@ -1,4 +1,5 @@
 package codsoft.backend.dtos;
+import codsoft.backend.models.Card;
 import lombok.Data;
 
 
@@ -14,6 +15,7 @@ public class UserDTO {
 	    private String email;
 
 	    private String password;
+	    private Card card;
 
 
 }

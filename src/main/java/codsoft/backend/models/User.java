@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @Table(
         name = "users",
         uniqueConstraints = {
-                @UniqueConstraint(columnNames = {"id", "name", "email"})
+                @UniqueConstraint(columnNames = {"name", "email"})
         }
 )
 @AllArgsConstructor
