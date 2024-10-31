@@ -137,12 +137,6 @@
 			<version>1.17.6</version>
 			<scope>test</scope>
 		</dependency>
-
-		<dependency>
-			<groupId>org.postgresql</groupId>
-			<artifactId>postgresql</artifactId>
-			<version>17.0</version>
-		</dependency>
 	</dependencies>
 	<build>
 		<plugins>
