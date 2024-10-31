@@ -1,4 +1,4 @@
-package codsoft.backend.TestIntegration.cucumber.config;
+package codsoft.backend.TestIntegration.cucumber;
 
 import codsoft.backend.dtos.FlightDTO;
 import codsoft.backend.models.Flight;
