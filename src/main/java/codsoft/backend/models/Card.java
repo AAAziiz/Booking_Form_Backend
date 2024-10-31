@@ -22,8 +22,19 @@ public class Card {
     private String  yearExpir;
     @Column
     private String  cardCvc;
+
     @OneToOne(mappedBy = "card")
     private User user;
+    @Override
+    public String toString() {
+        return "Card{" +
+                "id=" + id +
+                ", cardNumber='" + cardNumber + '\'' +
+                ", monthExpir='" + monthExpir + '\'' +
+                ", yearExpir='" + yearExpir + '\'' +
+                ", cardCvc='" + cardCvc + '\'' +
+                '}';
+    }
 
 
 }

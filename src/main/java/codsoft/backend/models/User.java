@@ -31,6 +31,17 @@ public class User {
     @Column(unique = true, nullable = false)
     private String password;
 
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                '}';
+    }
+
+
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "Card_id", referencedColumnName = "id")
     private Card card;

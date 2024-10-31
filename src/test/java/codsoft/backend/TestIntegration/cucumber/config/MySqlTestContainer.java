@@ -1,4 +1,4 @@
-/*package codsoft.backend.TestIntegration.cucumber.config;
+package codsoft.backend.TestIntegration.cucumber.config;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,10 +17,10 @@ public class MySqlTestContainer implements InitializingBean, DisposableBean {
         if (mysqlContainer == null) {
             logger.info("Starting MySQL Container...");
             mysqlContainer = new MySQLContainer<>("mysql:8.0")
-                    .withDatabaseName("codsoft")
+                    .withDatabaseName("arwa_backend")
                     .withUsername("root")
                     .withPassword("test")
-                    .withInitScript("TestIntegration/cucumber/migration/initialise_database_import.sql")
+                    .withInitScript("migration/initialise_database_import.sql")
                     .withReuse(true);
             mysqlContainer.start();
             logger.info("MySQL Container started with JDBC URL: {}", mysqlContainer.getJdbcUrl());
@@ -40,4 +40,3 @@ public class MySqlTestContainer implements InitializingBean, DisposableBean {
         return mysqlContainer;
     }
 }
-*/
