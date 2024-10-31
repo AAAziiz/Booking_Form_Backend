@@ -55,17 +55,17 @@ public class FlightServiceImpl implements FlightService {
 			repo.save(flightexist);
 		}
 	}
+
+
 	@Override
-	public void Addchildren(long id,Integer Newchildren) {
-		Optional<Flight> flight = repo.findById(id);
-		if (flight.isPresent()) {
-			Flight flightexist = flight.get();
-			Integer NbrChildren=flightexist.getChildren();
-			NbrChildren+=Newchildren;
-			flightexist.setChildren(NbrChildren);
-			repo.save(flightexist);
-		}}
-		@Override
+	public void Addchildren(Long flightId, int additionalChildren) {
+		Flight flight = repo.findById(flightId)
+				.orElseThrow(() -> new IllegalArgumentException("Flight not found with ID: " + flightId));
+		flight.setChildren(flight.getChildren() + additionalChildren);
+		repo.save(flight);
+	}
+
+	@Override
 		public void AddAdults ( long id, Integer NewAdults){
 			Optional<Flight> flight = repo.findById(id);
 			Flight flightexist = flight.get();

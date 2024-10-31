@@ -4,24 +4,20 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import codsoft.backend.dtos.SignupRequest;
 import codsoft.backend.dtos.UserDTO;
+import codsoft.backend.models.Card;
 import codsoft.backend.models.User;
+import codsoft.backend.repositories.CardRepository;
 import codsoft.backend.repositories.UserRepository;
 import codsoft.backend.services.AuthService;
-
 import io.cucumber.java.ParameterType;
 import io.cucumber.java.en.*;
-
 import jakarta.transaction.Transactional;
-import org.junit.Before;
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.test.context.event.annotation.BeforeTestClass;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
-import java.util.Optional;
 
 
 @Testcontainers
@@ -34,9 +30,10 @@ public class UserAccountManagementSteps {
     private UserRepository userRepo;
     @Autowired
     private AuthService authService;
+    @Autowired
+    private CardRepository cardRepo;
 
-
-
+    private Card card;
     private SignupRequest newUser;
     private User  existingUser,updatedUser;
     private UserDTO existingUserDTO,NewUserDTO;
@@ -67,7 +64,22 @@ public class UserAccountManagementSteps {
         return value;
     }
 
-
+    @ParameterType(".*")
+    public String cardNumber(String value) {
+        return value;
+    }
+    @ParameterType(".*")
+    public String monthExpir(String value) {
+        return value;
+    }
+    @ParameterType(".*")
+    public String yearExpir(String value) {
+        return value;
+    }
+    @ParameterType(".*")
+    public String cardCvc(String value) {
+        return value;
+    }
 
 
 
@@ -183,4 +195,40 @@ public class UserAccountManagementSteps {
         assertTrue(passwordEncoder.matches(newPassword, updatedUser.getPassword()),
                 "The user's password should be updated and match the new password.");
     }
+
+   //Scenario 6:Add a card to an existant user
+
+    @Given("A user with the email {email} already exists")
+    public void userAlreadyExists(String email) {
+
+        existingUser = userRepo.findByEmail(email);
+        System.out.println(existingUser);
+        assertNotNull(existingUser, "User with email " + email + " should exist.");
+    }
+
+    @When("the user want to add a card with cardNumber {cardNumber} monthExpir {monthExpir} yearExpir {yearExpir} and cardCvc {cardCvc}")
+    public void add_A_card(String cardNUm, String MonthExp,String YearExp,String Cvc ) {
+
+        card = new Card();
+        card.setUser(existingUser);
+        card.setCardNumber(cardNUm);
+        card.setMonthExpir(MonthExp);
+        card.setYearExpir(YearExp);
+        card.setCardCvc(Cvc);
+        cardRepo.save(card);
+        existingUser.setCard(card);
+        userRepo.save(existingUser);
+        System.out.println("User after update: " + existingUser);
+
+    }
+
+    @Then("the Add should be done successfully")
+    public void theAdd_should_be_done_successfully() {
+        assertNotNull(existingUser.getCard());
+        System.out.println("User card after update: " + existingUser.getCard());
+    }
+
+
+
+
 }

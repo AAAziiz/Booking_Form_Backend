@@ -26,7 +26,7 @@ public class FlightManagementSteps {
     private Flight flight;
     private FlightDTO flightDTO;
 
-    // Scénario 1: Créer un nouveau vol
+    // Scénario 1
     @Given("a new flight request with the following details:")
     public void createFlightWithDetails(io.cucumber.datatable.DataTable dataTable) {
         var flightData = dataTable.asMaps(String.class, String.class).get(0);
@@ -54,8 +54,10 @@ public class FlightManagementSteps {
 
     @Then("the flight should be successfully created and available in the flights list")
     public void verifyFlightCreation() {
-        assertEquals(flight, repo.findById(flight.getId()));
+        Optional<Flight> retrievedFlight = repo.findById(flight.getId());
+        assertEquals(flight, retrievedFlight.orElse(null));
     }
+
 
     // Scénario 2
     @Given("an existing flight with ID {int} and departure date {string}")
@@ -92,10 +94,16 @@ public class FlightManagementSteps {
     }
 
     // Scénario 4
-    @Given("an existing flight with ID {int} and {int} children")
-    public void existingFlightWithChildren(long id, int currentChildren) {
-        Optional<Flight> flight1= repo.findById(id);
-        flight1.ifPresent(value -> assertEquals(currentChildren, value.getChildren()));
+    @Given("an existing flight with ID {long} and {int} children")
+    public void existingFlightWithChildren(long flightId, int childrenCount) {
+        Flight flight = new Flight();
+        flight.setId(flightId);
+        flight.setChildren(childrenCount);
+        repo.save(flight);
+
+        Flight savedFlight = repo.findById(flightId).orElseThrow(() -> new IllegalArgumentException("Flight not found"));
+        assertEquals(childrenCount, savedFlight.getChildren(), "Le vol ne contient pas le nombre d'enfants attendu initialement");
+        this.flight = savedFlight;
     }
 
     @When("the number of children is increased by {int}")
@@ -105,8 +113,10 @@ public class FlightManagementSteps {
 
     @Then("the total children should be {int} on the flight")
     public void verifyTotalChildren(int totalChildren) {
+        flight = repo.findById(flight.getId()).orElseThrow(() -> new IllegalArgumentException("Flight not found"));
         assertEquals(totalChildren, flight.getChildren());
     }
+
 
     // Scénario 5
     @Given("an existing flight with ID {int} and {int} adults")

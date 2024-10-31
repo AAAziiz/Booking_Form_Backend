@@ -1,4 +1,4 @@
-Feature: UserAccountManagement
+Feature: User Account Management
 
   Scenario Outline: Add a new user with valid information
     When a sign-up request is sent for a new user with name <name>, email <email>, and password <password>
@@ -42,6 +42,13 @@ Feature: UserAccountManagement
     Examples:
       |   NewPassword              |  Email               |
       |iilmk                       | Yasmineee@yahoo.fr   |
-Scenario Outline: Add a card to an existant user
-   Given  A user with this email <Email> already exists
-   When
+
+  Scenario Outline: Add a card to an existant user
+   Given  A user with the email <Email> already exists
+    When the user want to add a card with cardNumber <cardNumber> monthExpir <monthExpir> yearExpir <yearExpir> and cardCvc <cardCvc>
+   Then the Add should be done successfully
+   Examples:
+       | Email                  | cardNumber |  monthExpir |yearExpir|cardCvc|
+       |   Arwa@gmail.com       |  212221   |   JUNE        |   2026  |K     |
+       |  Yasmineee@yahoo.fr    |298827   | JUNE |       2029         |N     |
+       | Hachem.cd@enicar.ucar.tn| 635288  | JULY        | 2099         |C     |

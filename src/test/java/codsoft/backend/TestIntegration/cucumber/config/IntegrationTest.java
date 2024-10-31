@@ -1,4 +1,4 @@
-/*package codsoft.backend.TestIntegration.cucumber.config;
+package codsoft.backend.TestIntegration.cucumber.config;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ActiveProfiles;
@@ -8,15 +8,14 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-// Annotation personnalisée pour les tests d'intégration avec MariaDB
+
 @ActiveProfiles("cucumber")
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_CLASS)
 @SpringBootTest
-@ UseMySqlContainer
+@UseMySqlContainer
 public @interface IntegrationTest {
 }
 
 
- */
