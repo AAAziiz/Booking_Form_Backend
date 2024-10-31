@@ -8,12 +8,8 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.springframework.beans.factory.annotation.Autowired;
-
 import java.util.Optional;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
-
-
 
 public class FlightManagementSteps {
 

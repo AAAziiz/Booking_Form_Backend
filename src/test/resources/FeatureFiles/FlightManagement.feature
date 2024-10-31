@@ -22,6 +22,8 @@ Feature: Flight Management
       | 1  | 1               | 1           | 2             |
       | 2  | 0               | 2           | 2             |
 
+
+
   Scenario Outline: Add additional adults to flight
     Given an existing flight with ID <id> and <currentAdults> adults
     When the number of adults is increased by <newAdults>
