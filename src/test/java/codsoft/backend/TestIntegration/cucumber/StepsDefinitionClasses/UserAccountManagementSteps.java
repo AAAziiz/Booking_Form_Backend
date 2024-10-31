@@ -1,4 +1,4 @@
-package codsoft.backend.TestIntegration.cucumber;
+package codsoft.backend.TestIntegration.cucumber.StepsDefinitionClasses;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertTrue;

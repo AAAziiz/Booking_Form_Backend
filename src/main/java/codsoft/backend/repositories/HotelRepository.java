@@ -9,6 +9,7 @@ import codsoft.backend.models.Hotel;
 
 public interface HotelRepository extends JpaRepository<Hotel, Long> {
     List<Hotel> findByDestination(String dest);
+    Hotel findOneByDestination(String dest);
 
 
 }

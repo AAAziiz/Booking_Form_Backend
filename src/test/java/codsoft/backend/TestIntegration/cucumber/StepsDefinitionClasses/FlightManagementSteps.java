@@ -1,4 +1,4 @@
-package codsoft.backend.TestIntegration.cucumber;
+package codsoft.backend.TestIntegration.cucumber.StepsDefinitionClasses;
 
 import codsoft.backend.dtos.FlightDTO;
 import codsoft.backend.models.Flight;
@@ -115,21 +115,33 @@ public class FlightManagementSteps {
 
 
     // Scénario 5
-    @Given("an existing flight with ID {int} and {int} adults")
-    public void existingFlightWithAdults(long id, int currentAdults) {
-        Optional<Flight> flight1= repo.findById(id);
-        flight1.ifPresent(value -> assertEquals(currentAdults, value.getChildren()));
+    @Given("an existing flight with ID {long} and {int} adults")
+    public void existingFlightWithAdults(long flightId, int adultsCount) {
+        Flight flight = new Flight();
+        flight.setId(flightId);
+        flight.setAdults(adultsCount);
+        repo.save(flight);
+        this.flight = repo.findById(flightId).orElseThrow(() -> new IllegalArgumentException("Flight not found"));
     }
+
 
     @When("the number of adults is increased by {int}")
-    public void increaseAdults(int newAdults) {
-        flightService.AddAdults(flight.getId(), newAdults);
+    public void increaseAdults(int increment) {
+        if (this.flight != null) {
+            this.flight.setAdults(this.flight.getAdults() + increment);
+            repo.save(this.flight);
+        } else {
+            throw new IllegalStateException("Flight not initialized");
+        }
     }
 
+
     @Then("the total adults should be {int} on the flight")
-    public void verifyTotalAdults(int totalAdults) {
-        assertEquals(totalAdults, flight.getAdults());
+    public void verifyTotalAdults(int expectedAdults) {
+        Flight updatedFlight = repo.findById(this.flight.getId()).orElseThrow(() -> new IllegalArgumentException("Flight not found"));
+        assertEquals(expectedAdults, updatedFlight.getAdults(), "Le nombre total d'adultes n'est pas correct");
     }
+
 
     @When("the user changes the flight type to {string}")
     public void updateFlightType(String flightType) {

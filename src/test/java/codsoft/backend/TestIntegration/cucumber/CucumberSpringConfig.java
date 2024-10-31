@@ -32,7 +32,6 @@ public class CucumberSpringConfig {
     private void clearDatabase() {
         try {
             jdbcTemplate.execute("TRUNCATE TABLE users");
-            jdbcTemplate.execute("TRUNCATE TABLE cards");
             jdbcTemplate.execute("TRUNCATE TABLE hotels");
             jdbcTemplate.execute("TRUNCATE TABLE flights");
             jdbcTemplate.execute("TRUNCATE TABLE cars");
