@@ -41,7 +41,7 @@ pipeline {
       steps {
         dependencyCheck additionalArguments: ''' 
                     -o './'
-                    -s './'
+                    -s './target'
                     -f 'ALL' 
                     --prettyPrint''', odcInstallation: 'OWASP-DC'
         
