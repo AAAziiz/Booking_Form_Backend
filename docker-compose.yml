@@ -22,7 +22,7 @@ services:
 
   mysql:
     image: mysql:latest
-    container_name: mysql_seqdatabase
+    container_name: mysql_secdatabase
     ports:
       - "3306:3306"
     environment:
