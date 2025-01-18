@@ -64,6 +64,12 @@ pipeline {
                 }
             }
 
+            stage('Trivy Scan') {
+             steps {
+                    sh 'trivy image app-security -o trivy-report.txt'
+                }
+            }
+
 
 
 
