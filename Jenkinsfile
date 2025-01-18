@@ -16,6 +16,14 @@ pipeline {
             }
         }
 
+        stage('Build Application') {
+            steps {
+                script {
+                    sh 'mvn clean install -DskipTests'  
+                }
+            }
+        }
+
 
         stage("Sonarqube Analysis "){ 
                     steps{
@@ -39,8 +47,7 @@ pipeline {
         
         stage('OWASP Dependency-Check Vulnerabilities') {
       steps {
-        dependencyCheck additionalArguments: ''' 
-                    --updateonly
+        dependencyCheck additionalArguments: '''                
                     -o './'
                     -s './'
                     -f 'ALL' 
