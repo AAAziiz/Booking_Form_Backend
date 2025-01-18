@@ -49,9 +49,10 @@ pipeline {
       steps {
         dependencyCheck additionalArguments: '''                
                     -o './'
-                    -s './'
+                    -s './target'
                     -f 'ALL' 
-                    --prettyPrint''', odcInstallation: 'OWASP-DC'
+                    --prettyPrint
+                    --log ./dependency-check-debug.log ''', odcInstallation: 'OWASP-DC'
         
         dependencyCheckPublisher pattern: 'dependency-check-report.xml'
       }
