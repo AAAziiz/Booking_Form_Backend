@@ -36,19 +36,20 @@ pipeline {
                 *///}
         
 
-            stage('OWASP Dependency-Check Vulnerabilities') {
-                steps {
-                    dependencyCheck additionalArguments: ''' 
-                                -o './'
-                                -s './target'
-                                -f 'ALL'
-                                --prettyPrint
-                                --log ./dependency-check-debug.log''', 
-                                odcInstallation: 'OWASP-DC'
-                    
-                    dependencyCheckPublisher pattern: 'dependency-check-report.xml'
-                }
-            }
+        
+        stage('OWASP Dependency-Check Vulnerabilities') {
+      steps {
+        dependencyCheck additionalArguments: ''' 
+                    --updateonly
+                    -o './'
+                    -s './'
+                    -f 'ALL' 
+                    --prettyPrint''', odcInstallation: 'OWASP-DC'
+        
+        dependencyCheckPublisher pattern: 'dependency-check-report.xml'
+      }
+    }
+
 
                
         
