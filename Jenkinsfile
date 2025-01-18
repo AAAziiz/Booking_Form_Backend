@@ -40,7 +40,7 @@ pipeline {
         
       stage("OWASP Dependency Check") {
             steps {
-                dependencyCheck additionalArguments: '--scan /home/aziz/.jenkins/workspace/security-check --format XML', odcInstallation: 'OWASP-DC'
+                dependencyCheck additionalArguments: '--scan /home/aziz/.jenkins/workspace/security-check/ --format XML', odcInstallation: 'OWASP-DC'
                 dependencyCheckPublisher pattern: '**/dependency-check-report.xml'
             }
         }
