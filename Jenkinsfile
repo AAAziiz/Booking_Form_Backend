@@ -34,14 +34,17 @@ pipeline {
                         }
                    }
                 *///}
-               
+        
 
-        
-        
-      stage("OWASP Dependency Check") {
+
+          stage ('Dependency Check') {
             steps {
-                dependencyCheck additionalArguments: '--scan /home/aziz/.jenkins/workspace/security-check/pom.xml --format XML', odcInstallation: 'OWASP-DC'
-                dependencyCheckPublisher pattern: '**/dependency-check-report.xml'
+                dependencyCheck additionalArguments: ''' 
+                    -o "./" 
+                    -s "./"
+                    -f "ALL" 
+                    --prettyPrint''', odcInstallation: 'OWASP-DC'
+                dependencyCheckPublisher pattern: 'dependency-check-report.xml'
             }
         }
 
