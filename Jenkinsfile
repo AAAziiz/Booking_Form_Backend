@@ -73,7 +73,7 @@ pipeline {
                     withCredentials([usernamePassword(credentialsId: 'secret', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
                     sh '''
                 docker login -u ${DOCKER_USERNAME} -p ${DOCKER_PASSWORD} 
-                docker tag app-back azziiz/security-check:latest
+                docker tag app-security azziiz/security-check:latest
                 docker push azziiz/security-check:latest
 
                 
