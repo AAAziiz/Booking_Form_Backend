@@ -25,7 +25,7 @@ pipeline {
         }
 
 
-        stage("Sonarqube Analysis "){ 
+        stage("Sonarqube Analysis"){ 
                     steps{
                         withSonarQubeEnv('Sonarqube') {
                             sh ''' $SCANNER_HOME/bin/sonar-scanner -Dsonar.projectName=sonar-security-check \
