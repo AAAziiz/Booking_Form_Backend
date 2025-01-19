@@ -57,7 +57,7 @@ pipeline {
                 }
             }
 
-            stage('Trivy Scan') {
+            stage('Trivy Scan Image') {
              steps {
                     sh 'trivy image app-security -o trivy-report.json'
                 }
