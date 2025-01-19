@@ -6,7 +6,7 @@ services:
       context: .
       dockerfile: Dockerfile
     image: app-security
-    container_name: secbackend
+    container_name: secbackend  
     ports:
       - "8090:8090"
     volumes:
